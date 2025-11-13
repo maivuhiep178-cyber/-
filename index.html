@@ -1,269 +1,336 @@
 <!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Ryu</title>
-  <meta property="og:title" content="Ryu" />
-  <meta property="og:description" content="Bored person, codes stuff, make stuff, does stuff." />
-  <meta property="og:image" content="https://raw.githubusercontent.com/afkar-gg/img-storage/refs/heads/main/banner_embed.png" />
-  <meta property="og:type" content="profile" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Ryu" />
-  <meta name="twitter:description" content="Bored person" />
-  <meta name="twitter:image" content="https://raw.githubusercontent.com/afkar-gg/img-storage/refs/heads/main/banner_embed.png" />
+  <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Ryu's web</title>
+    <meta property="og:title" content="Ryu's web" />
+    <meta property="og:description" content="Bored person, codes stuff, make stuff, does stuff." />
+    <meta property="og:image" content="https://raw.githubusercontent.com/afkar-gg/img-storage/refs/heads/main/banner_embed.png" />
+    <meta property="og:type" content="profile" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Ryu's web" />
+    <meta name="twitter:description" content="Bored person, codes stuff, make stuff, does stuff." />
+    <meta name="twitter:image" content="https://raw.githubusercontent.com/afkar-gg/img-storage/refs/heads/main/banner_embed.png" />
 
-  <link rel="icon" href="/favicon.png" type="image/png">
-  <link rel="apple-touch-icon" href="/favicon.png">
+        <link rel="icon" href="/favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="/favicon.png">
 
-  <style>
-    :root{
-      --bg1:#0a0f2b;
-      --bg2:#07172f;
-      --card:#0c1128;
-      --accent1:#4ade80;
-      --accent2:#6366f1;
-      --text:#e0e7ff;
-      --subtext:#a5b4fc;
-    }
+    <style>
+      /* Root color variables and base typography */
+      :root{
+        --bg1:#0f1724; --bg2:#071126; --card:#0b1220;
+        --accent1:#6ee7b7; --accent2:#60a5fa;
+      }
+      html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial}
+      body{
+        /* layered gradient background with subtle colored blobs */
+        background: radial-gradient(1200px 600px at 10% 10%, rgba(96,165,250,0.08), transparent),
+                    radial-gradient(900px 500px at 90% 90%, rgba(110,231,183,0.06), transparent),
+                    linear-gradient(180deg,var(--bg1),var(--bg2));
+        display:flex;align-items:center;justify-content:flex-start;color:#e6eef8;flex-direction:column;gap:16px;padding:16px 0;
+      }
 
-    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial}
-    body{
-      background: radial-gradient(1200px 600px at 10% 10%, rgba(99,102,241,0.08), transparent),
-                  radial-gradient(900px 500px at 90% 90%, rgba(74,222,128,0.06), transparent),
-                  linear-gradient(180deg,var(--bg1),var(--bg2));
-      display:flex;align-items:center;justify-content:flex-start;color:var(--text);flex-direction:column;gap:16px;padding:16px 0;
-    }
+      /* floating decorative blobs */
+      .blob{
+        position:fixed;filter:blur(60px);opacity:0.5;border-radius:50%;transform-origin:center;
+        will-change:transform,opacity;
+        mix-blend-mode:screen; pointer-events:none;
+      }
+      .b1{width:420px;height:420px;left:-120px;top:-60px;background:linear-gradient(135deg,#60a5fa,#7c3aed);animation:float1 12s ease-in-out infinite;}
+      .b2{width:300px;height:300px;right:-80px;bottom:-40px;background:linear-gradient(135deg,#34d399,#60a5fa);animation:float2 14s ease-in-out infinite;}
+      @keyframes float1{0%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(30px) rotate(8deg)}100%{transform:translateY(0) rotate(0deg)}}
+      @keyframes float2{0%{transform:translateY(0) rotate(0deg) scale(1)}50%{transform:translateY(-30px) rotate(-6deg) scale(1.05)}100%{transform:translateY(0) rotate(0deg) scale(1)}}
 
-    .blob{
-      position:fixed;filter:blur(60px);opacity:0.5;border-radius:50%;transform-origin:center;
-      will-change:transform,opacity;
-      mix-blend-mode:screen; pointer-events:none;
-    }
-    .b1{width:420px;height:420px;left:-120px;top:-60px;background:linear-gradient(135deg,#6366f1,#4ade80);animation:float1 12s ease-in-out infinite;}
-    .b2{width:300px;height:300px;right:-80px;bottom:-40px;background:linear-gradient(135deg,#34d399,#6366f1);animation:float2 14s ease-in-out infinite;}
-    @keyframes float1{0%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(30px) rotate(8deg)}100%{transform:translateY(0) rotate(0deg)}}
-    @keyframes float2{0%{transform:translateY(0) rotate(0deg) scale(1)}50%{transform:translateY(-30px) rotate(-6deg) scale(1.05)}100%{transform:translateY(0) rotate(0deg) scale(1)}}
+      /* card container: glassy panel with max width and responsive sizing */
+      .card{
+        width:min(760px,96vw); max-width:760px;
+        background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+        border:1px solid rgba(255,255,255,0.04);
+        box-shadow: 0 10px 40px rgba(2,6,23,0.6);
+        border-radius:18px; padding:24px; display:flex; gap:16px; align-items:center;
+        backdrop-filter: blur(8px);
+      }
 
-    .card{
-      width:min(760px,96vw); max-width:760px;
-      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border:1px solid rgba(255,255,255,0.06);
-      box-shadow: 0 10px 40px rgba(2,6,23,0.7);
-      border-radius:18px; padding:24px; display:flex; gap:16px; align-items:center;
-      backdrop-filter: blur(10px);
-    }
+      /* left column: avatar + basic info */
+      .left{
+        width:160px; min-width:140px; text-align:center;
+      }
+      .avatar{
+        width:120px;height:120px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;
+        font-weight:700;font-size:28px;color:var(--bg1); background:linear-gradient(135deg,var(--accent1),var(--accent2));
+        box-shadow: 0 8px 30px rgba(2,6,23,0.6);
+        border:3px solid rgba(255,255,255,0.06);
+      }
+      .profile-info{display:flex;flex-direction:column;align-items:center;}
+      .name-wrapper{display:flex;align-items:baseline;gap:6px;justify-content:center;}
+      .name{margin-top:12px;font-size:20px;font-weight:700}
+      .handle{color:rgba(230,238,248,0.6);font-size:13px;margin-top:4px}
+      .country{color:rgba(230,238,248,0.8);font-size:14px;margin-top:4px}
+      .discord-status{display:flex;align-items:center;gap:8px;margin-top:8px;justify-content:center;}
+      .discord-icon{width:20px;height:20px;}
+      .status-text{font-size:13px;}
 
-    .left{
-      width:160px; min-width:140px; text-align:center;
-    }
-    .avatar{
-      width:120px;height:120px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;
-      font-weight:700;font-size:28px;color:var(--bg1); background:#11131f; /* dark avatar background */
-      box-shadow: 0 8px 30px rgba(2,6,23,0.6);
-      border:3px solid rgba(255,255,255,0.06);
-      overflow:hidden;
-    }
-    .avatar img{width:100%;height:100%;object-fit:cover; border-radius:999px; filter:brightness(0.5);}
-    .profile-info{display:flex;flex-direction:column;align-items:center;}
-    .name-wrapper{display:flex;align-items:baseline;gap:6px;justify-content:center;}
-    .name{margin-top:12px;font-size:20px;font-weight:700}
-    .handle{color:var(--subtext);font-size:13px;margin-top:4px}
-    .country{color:var(--subtext);font-size:14px;margin-top:4px}
-    .discord-status{display:flex;align-items:center;gap:8px;margin-top:8px;justify-content:center;}
-    .discord-icon{width:20px;height:20px;}
-    .status-text{font-size:13px;color:var(--subtext);}
+      /* right column: intro, tags, and links */
+      .right{flex:1;}
+      .intro{font-size:18px;margin:6px 0 12px 0;min-height:56px;line-height:1.3}
+      .tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+      .tag{font-size:12px;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.03);color:rgba(230,238,248,0.8);border:1px solid rgba(255,255,255,0.02)}
 
-    .right{flex:1;}
-    .intro{font-size:18px;margin:6px 0 12px 0;min-height:56px;line-height:1.3;color:var(--text)}
-    .tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
-    .tag{font-size:12px;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.03);color:var(--subtext);border:1px solid rgba(255,255,255,0.02)}
+      /* links column: stacked link items with icons */
+      .links{display:flex;flex-direction:column;gap:8px}
+      .link{
+        display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:12px;
+        background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+        border:1px solid rgba(255,255,255,0.03); text-decoration:none; color:inherit;
+        transform-origin:center left; will-change:transform,opacity;
+        transition:transform .25s cubic-bezier(.2,.9,.3,1), box-shadow .2s;
+        box-shadow: 0 4px 18px rgba(2,6,23,0.45);
+      }
+      .link:hover{transform:translateX(6px) scale(1.01); box-shadow:0 10px 30px rgba(2,6,23,0.55)}
+      .link .dot{
+        width:36px;height:36px;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;
+        background:linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+        font-weight:700;
+      }
+      .link-icon{width:20px;height:20px;}
+      .pulse{
+        animation:pulse 2.6s ease-in-out infinite;
+      }
+      @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.02)}100%{transform:scale(1)}}
 
-    .links{display:flex;flex-direction:column;gap:8px}
-    .link{
-      display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:12px;
-      background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border:1px solid rgba(255,255,255,0.03); text-decoration:none; color:inherit;
-      transform-origin:center left; will-change:transform,opacity;
-      transition:transform .25s cubic-bezier(.2,.9,.3,1), box-shadow .2s;
-      box-shadow: 0 4px 18px rgba(2,6,23,0.45);
-    }
-    .link:hover{transform:translateX(6px) scale(1.01); box-shadow:0 10px 30px rgba(2,6,23,0.6)}
-    .link .dot{
-      width:36px;height:36px;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;
-      background:linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-      font-weight:700;
-    }
-    .link-icon{width:20px;height:20px;}
-    .pulse{
-      animation:pulse 2.6s ease-in-out infinite;
-    }
-    @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.02)}100%{transform:scale(1)}}
+      .reveal{opacity:0; transform:translateY(8px); transition:opacity .5s ease, transform .5s cubic-bezier(.2,.9,.3,1)}
+      .reveal.visible{opacity:1; transform:translateY(0)}
 
-    .reveal{opacity:0; transform:translateY(8px); transition:opacity .5s ease, transform .5s cubic-bezier(.2,.9,.3,1)}
-    .reveal.visible{opacity:1; transform:translateY(0)}
+      /* interest card: three boxes (desktop: row, mobile: stacked) */
+      .interest-card .boxes{display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap;}
+      .interest-card .box{text-align:center;flex:1 1 30%;padding:12px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.02);min-width:200px;}
+      .interest-card .box-icon{width:40px;height:40px;margin:0 auto 4px;display:block;}
+      .interest-card h2{font-size:16px;margin-bottom:8px;}
+      .interest-card .box h3{font-size:13px;margin-bottom:2px;}
+      .interest-card .box p{font-size:12px;color:rgba(230,238,248,0.8);}
 
-    .interest-card .boxes{display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap;}
-    .interest-card .box{text-align:center;flex:1 1 30%;padding:12px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.02);min-width:200px;}
-    .interest-card .box-icon{width:40px;height:40px;margin:0 auto 4px;display:block;}
-    .interest-card h2{font-size:16px;margin-bottom:8px;}
-    .interest-card .box h3{font-size:13px;margin-bottom:2px;}
-    .interest-card .box p{font-size:12px;color:var(--subtext);}
+      .small{font-size:13px;color:rgba(230,238,248,0.6)}
 
-    @media (max-width:720px){
-      .card{flex-direction:column;align-items:flex-start;padding:16px;gap:12px}
-      .left{width:100%;display:flex;gap:8px;align-items:center;text-align:left;}
-      .profile-info{align-items:flex-start;}
-      .name-wrapper{justify-content:flex-start;}
-      .avatar{width:72px;height:72px;font-size:18px}
-      .name{font-size:18px;margin-top:0}
-      .handle{font-size:12px}
-      .country{font-size:13px;margin-top:2px}
-      .discord-status{margin-top:4px;justify-content:flex-start;}
-      .discord-icon{width:18px;height:18px;}
-      .status-text{font-size:12px;}
-      .right{width:100%}
-      .intro{font-size:16px;margin:4px 0 8px 0;line-height:1.2}
-      .tags{margin-bottom:8px}
-      .tag{font-size:11px;padding:4px 8px}
-      .links{gap:6px}
-      .link{gap:6px;padding:6px 10px}
-      .link .dot{width:32px;height:32px}
-      .link-icon{width:18px;height:18px;}
-      .interest-card .boxes{flex-direction:column;gap:12px;flex-wrap:nowrap;width:100%;}
-      .interest-card .box{flex:none;width:calc(100%-8px);min-width:auto;padding:14px;margin:0 auto;border-radius:14px;}
-    }
+      /* responsive adjustments for small screens */
+      @media (max-width:720px){
+        .card{flex-direction:column;align-items:flex-start;padding:16px;gap:12px}
+        .left{width:100%;display:flex;gap:8px;align-items:center;text-align:left;}
+        .profile-info{align-items:flex-start;}
+        .name-wrapper{justify-content:flex-start;}
+        .avatar{width:72px;height:72px;font-size:18px}
+        .name{font-size:18px;margin-top:0}
+        .handle{font-size:12px}
+        .country{font-size:13px;margin-top:2px}
+        .discord-status{margin-top:4px;justify-content:flex-start;}
+        .discord-icon{width:18px;height:18px;}
+        .status-text{font-size:12px;}
+        .right{width:100%}
+        .intro{font-size:16px;margin:4px 0 8px 0;line-height:1.2}
+        .tags{margin-bottom:8px}
+        .tag{font-size:11px;padding:4px 8px}
+        .links{gap:6px}
+        .link{gap:6px;padding:6px 10px}
+        .link .dot{width:32px;height:32px}
+        .link-icon{width:18px;height:18px;}
 
-    #loader{position:fixed;top:0;left:0;width:100%;height:100%;background:var(--bg1);display:flex;align-items:center;justify-content:center;z-index:999;}
-    .spinner{width:40px;height:40px;border:4px solid rgba(255,255,255,0.1);border-top:4px solid var(--accent1);border-radius:50%;animation:spin 1s linear infinite;}
-    @keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+        .interest-card {
+          padding-top: 12px;
+          padding-bottom: 12px;
+          padding-left: 12px;
+          padding-right: 12px;
+          box-sizing: border-box;
+          width: 100%;
+        }
 
-    footer{
-      width:100%;
-      text-align:center;
-      padding:12px 0;
-      color:var(--subtext);
-      font-size:13px;
-      letter-spacing:0.5px;
-      border-top:1px solid rgba(255,255,255,0.06);
-      margin-top:24px;
-      font-family: Inter, sans-serif;
-    }
-  </style>
-</head>
+        .interest-card .boxes{
+          flex-direction:column;
+          gap:12px;
+          flex-wrap:nowrap;
+          width:100%;
+        }
+        .interest-card .box{
+          flex:none;
+          width: calc(100% - 8px); /* small inset from the edges */
+          min-width:auto;
+          padding:14px;
+          margin:0 auto;
+          box-sizing:border-box;
+          border-radius:14px;
+        }
+        .interest-card .box-icon{width:36px;height:36px;}
+        .interest-card h2{font-size:15px;margin-bottom:10px;text-align:center;width:100%;}
+        .interest-card .box h3{font-size:12px;}
+        .interest-card .box p{font-size:11px;}
+      }
 
-<body>
-  <div id="loader"><div class="spinner"></div></div>
-  <div class="blob b1" aria-hidden="true"></div>
-  <div class="blob b2" aria-hidden="true"></div>
+      /* loader overlay shown until resources are ready */
+      #loader{position:fixed;top:0;left:0;width:100%;height:100%;background:var(--bg1);display:flex;align-items:center;justify-content:center;z-index:999;}
+      .spinner{width:40px;height:40px;border:4px solid rgba(255,255,255,0.1);border-top:4px solid var(--accent1);border-radius:50%;animation:spin 1s linear infinite;}
+      @keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+    </style>
+  </head>
 
-  <main class="card" id="card" role="main" aria-labelledby="nameHeading">
-    <div class="left">
-      <div class="avatar" id="avatar">
-        <img src="https://raw.githubusercontent.com/afkar-gg/bot-proxy/refs/heads/main/IMG-20250523-WA0002.jpg" alt="Ryu">
-      </div>
-      <div class="profile-info">
-        <div class="name-wrapper">
-          <div class="name" id="nameHeading">Ryu</div>
-          <div class="handle small">@Whyunisme</div>
-        </div>
-        <div class="discord-status">
-          <img class="discord-icon" src="https://raw.githubusercontent.com/afkar-gg/img-storage/refs/heads/main/discord.png" alt="Discord">
-          <span class="status-text" id="discord-status">Loading...</span>
-        </div>
-        <div class="country">VietNam</div>
-      </div>
-    </div>
+  <body>
+        <div id="loader"><div class="spinner"></div></div>
 
-    <div class="right">
-      <div class="intro reveal" id="intro"></div>
-      <div class="tags reveal" id="tags">
-        <div class="tag">Roblox</div>
-        <div class="tag">Minecraft</div>
-        <div class="tag">Phở</div>
-        <div class="tag">Dev-C++</div>
-      </div>
-      <nav class="links" aria-label="Links" id="links">
-        <!-- Facebook placeholder
-        <a class="link reveal" href="#" target="_blank">
-          <div class="dot pulse" aria-hidden="true">F</div>
-          <div>
-            <div style="font-weight:600">Facebook</div>
-            <div class="small">facebook.com</div>
-          </div>
-        </a>
-        -->
-        <a class="link reveal" href="https://x.com/whyunisme" target="_blank" rel="noopener noreferrer">
-          <div class="dot pulse" aria-hidden="true">X</div>
-          <div>
-            <div style="font-weight:600">X</div>
-            <div class="small">x.com</div>
-          </div>
-        </a>
-      </nav>
-    </div>
-  </main>
+        <div class="blob b1" aria-hidden="true"></div>
+    <div class="blob b2" aria-hidden="true"></div>
 
-  <footer>
-    &copy; 2025 Ryu. Made with 💙 and code.
-  </footer>
+        <main class="card" id="card" role="main" aria-labelledby="nameHeading">
+      <div class="left">
+        <div class="avatar" id="avatar"><img src="https://raw.githubusercontent.com/afkar-gg/bot-proxy/refs/heads/main/IMG-20250523-WA0002.jpg" alt="Ryu" style="width:100%;height:100%;border-radius:999px;object-fit:cover"></div>
+        <div class="profile-info">
+          <div class="name-wrapper">
+            <div class="name" id="nameHeading">Ryu</div>
+            <div class="handle small">@afkar</div>
+          </div>
+          <div class="discord-status">
+            <img class="discord-icon" src="https://raw.githubusercontent.com/afkar-gg/img-storage/refs/heads/main/discord.png" alt="Discord">
+            <span class="status-text" id="discord-status">Loading...</span>
+          </div>
+          <div class="country">Indonesia</div>
+        </div>
+      </div>
 
-  <script>
-    const lines = ["Bored person. Building random things","Certified Dumbass. Good at making bug","Random student that likes codes & money"];
-    const introEl = document.getElementById("intro");
-    let lineIdx = 0, charIdx = 0;
+      <div class="right">
+                <div class="intro reveal" id="intro"></div>
 
-    function typeTick(){
-      if(lineIdx >= lines.length) return;
-      const current = lines[lineIdx];
-      introEl.textContent = current.slice(0, charIdx) + (charIdx % 2 ? "▌" : "");
-      charIdx++;
-      if(charIdx > current.length + 6){
-        lineIdx++; charIdx = 0;
-        setTimeout(typeTick, 400);
-        if(lineIdx === 1){ revealStagger(); }
-      } else { setTimeout(typeTick, 40 + Math.random()*40); }
-    }
+                <div class="tags reveal" id="tags">
+          <div class="tag">Boosting Service</div>
+          <div class="tag">Rblx Lua Scripting</div>
+          <div class="tag">AI Prompter</div>
+        </div>
 
-    function revealStagger(){
-      const reveals = Array.from(document.querySelectorAll(".reveal"));
-      reveals.forEach((el,i)=>{ setTimeout(()=> el.classList.add("visible"), i*120 + 180); });
-    }
+                <nav class="links" aria-label="Links" id="links">
 
-    const card = document.getElementById("card");
-    try{
-      const isMobile = window.matchMedia && window.matchMedia('(max-width:720px)').matches;
-      if(!isMobile){
-        document.addEventListener("pointermove", (e)=>{
-          const rect = card.getBoundingClientRect();
-          const dx = (e.clientX - (rect.left + rect.width/2)) / rect.width;
-          const dy = (e.clientY - (rect.top + rect.height/2)) / rect.height;
-          card.style.transform = 'perspective(900px) translateZ(0) rotateX(' + (-dy * 4) + 'deg) rotateY(' + (dx * 6) + 'deg)';
-        });
-        document.addEventListener("pointerleave", ()=> card.style.transform = "");
-      } else { card.style.transform = ""; }
-    } catch(err){ card.style.transform = ""; }
+            <a class="link reveal" href="https://x.com/whyunisme" target="_blank" rel="noopener noreferrer" data-idx="0">
+              <div class="dot pulse" aria-hidden="true"><img class="link-icon" src="https://raw.githubusercontent.com/afkar-gg/img-storage/refs/heads/main/x.png" alt="X icon"></div>
+              <div>
+                <div style="font-weight:600">X (formerly Twitter)</div>
+                <div class="small">x.com</div>
+              </div>
+            </a>
+        </nav>
+      </div>
+    </main>
 
-    document.addEventListener("keydown", (e)=>{
-      if((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k"){
-        const first = document.querySelector(".link");
-        if(!first) return;
-        navigator.clipboard.writeText(first.href).then(()=> { first.animate([{transform:'translateY(0)'},{transform:'translateY(-6px)'}], {duration:180,direction:'alternate',iterations:2}); });
-      }
-    });
+        <section class="card interest-card reveal">
+      <h2 class="reveal">Interest</h2>
+      <div class="boxes">
+        <div class="box reveal">
+          <img class="box-icon" src="https://raw.githubusercontent.com/afkar-gg/img-storage/refs/heads/main/joystick.png" alt="Games icon">
+          <h3>Play Games</h3>
+          <p>Roblox, Minecraft</p>
+        </div>
+        <div class="box reveal">
+          <img class="box-icon" src="https://raw.githubusercontent.com/afkar-gg/img-storage/refs/heads/main/forknknife.png" alt="Eat and Drink icon">
+          <h3>Eat and Drink</h3>
+          <p>Phở</p>
+        </div>
+        <div class="box reveal">
+          <img class="box-icon" src="https://raw.githubusercontent.com/afkar-gg/img-storage/refs/heads/main/code.png" alt="Code icon">
+          <h3>Codes stuff</h3>
+          <p>Likes to code on its free time (using Dev-C++)</p>
+        </div>
+      </div>
+    </section>
 
-    fetch('https://api.lanyard.rest/v1/users/1195711931433099297')
-      .then(res=>res.json())
-      .then(data=>{
-        const status = data.data && data.data.discord_status ? data.data.discord_status : 'offline';
-        document.getElementById('discord-status').textContent = status.charAt(0).toUpperCase() + status.slice(1);
-      })
-      .catch(()=>document.getElementById('discord-status').textContent='Offline');
+    <script>
+      // typing intro using the bioData.bioLines provided server-side
+      const lines = ["Bored person. Building random things","Certified Dumbass. Good at making bug","Random student that likes codes"];
+      const introEl = document.getElementById("intro");
+      let lineIdx = 0, charIdx = 0;
 
-    const images = document.querySelectorAll('img');
-    const promises = Array.from(images).map(img=>new Promise(resolve=>{if(img.complete) resolve(); else{img.onload=resolve; img.onerror=resolve;}}));
-    Promise.all(promises).then(()=>{document.getElementById('loader').style.display='none'; typeTick();});
-    window.addEventListener("load", ()=>{document.body.style.transition="filter .6s ease"; setTimeout(revealStagger,1200);});
-  </script>
-</body>
-</html>
+      function typeTick(){
+        if(lineIdx >= lines.length) return;
+        const current = lines[lineIdx];
+        // display partial text with a blinking block caret
+        introEl.textContent = current.slice(0, charIdx) + (charIdx % 2 ? "▌" : "");
+        charIdx++;
+        if(charIdx > current.length + 6){
+          lineIdx++; charIdx = 0;
+          setTimeout(typeTick, 400);
+          // trigger reveal sequence after first line has completed
+          if(lineIdx === 1){
+            revealStagger();
+          }
+        } else {
+          setTimeout(typeTick, 40 + Math.random()*40);
+        }
+      }
+
+      // reveal elements with a small staggered delay
+      function revealStagger(){
+        const reveals = Array.from(document.querySelectorAll(".reveal"));
+        reveals.forEach((el,i)=>{
+          setTimeout(()=> el.classList.add("visible"), i*120 + 180);
+        });
+      }
+
+      // pointer-based parallax/tilt effect applied only on non-mobile viewports
+      const card = document.getElementById("card");
+      try {
+        const isMobile = window.matchMedia && window.matchMedia('(max-width:720px)').matches;
+        if (!isMobile) {
+          // Attach pointer handlers when viewport is larger than 720px
+          document.addEventListener("pointermove", (e)=>{
+            const rect = card.getBoundingClientRect();
+            const dx = (e.clientX - (rect.left + rect.width/2)) / rect.width;
+            const dy = (e.clientY - (rect.top + rect.height/2)) / rect.height;
+            card.style.transform = 'perspective(900px) translateZ(0) rotateX(' + (-dy * 4) + 'deg) rotateY(' + (dx * 6) + 'deg)';
+          });
+          document.addEventListener("pointerleave", ()=> card.style.transform = "");
+        } else {
+          // On narrow viewports ensure no transform is applied
+          card.style.transform = "";
+        }
+      } catch (err) {
+        // Fallback: keep the card static if any error occurs
+        card.style.transform = "";
+      }
+
+      // keyboard shortcut: Ctrl/Cmd + K copies first link's URL
+      document.addEventListener("keydown", (e)=>{
+        if((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k"){
+          const first = document.querySelector(".link");
+          if(!first) return;
+          navigator.clipboard.writeText(first.href).then(()=> {
+            // small feedback animation on success
+            first.animate([{transform:'translateY(0)'},{transform:'translateY(-6px)'}], {duration:180, direction:'alternate',iterations:2});
+          });
+        }
+      });
+
+      // fetch discord presence and display status text
+      fetch('https://api.lanyard.rest/v1/users/1195711931433099297')
+        .then(res => res.json())
+        .then(data => {
+          // data.data.discord_status expected; fallback to 'offline' if not present
+          const status = data.data && data.data.discord_status ? data.data.discord_status : 'offline';
+          document.getElementById('discord-status').textContent = status.charAt(0).toUpperCase() + status.slice(1);
+        })
+        .catch(() => document.getElementById('discord-status').textContent = 'Offline');
+
+      // show loader until all images load or error
+      const images = document.querySelectorAll('img');
+      const promises = Array.from(images).map(img => new Promise(resolve => {
+        if (img.complete) resolve();
+        else {
+          img.onload = resolve;
+          img.onerror = resolve;
+        }
+      }));
+      Promise.all(promises).then(() => {
+        document.getElementById('loader').style.display = 'none';
+        typeTick(); // start the typing animation after loader hides
+      });
+
+      // Ensure reveal sequence still triggers if typing already progressed
+      window.addEventListener("load", ()=> {
+        document.body.style.transition = "filter .6s ease";
+        setTimeout(revealStagger, 1200);
+      });
+    </script>
+  </body>
+  </html>
